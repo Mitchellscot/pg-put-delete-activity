@@ -1,16 +1,21 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'monospace';
+  background-color: #252525;
+  color: #00ffee;
+  text-align: center;
 }
 
 header {
-  background-color: brown;
+  background-color: orange;
   padding: 1em;
   margin-bottom: 1em;
 }
 
 h1 {
   margin: 0;
+  color: black;
+  font-size: 36px;
 }
 
 main {
@@ -19,7 +24,7 @@ main {
 }
 
 section {
-  background-color: linen;
+  background-color: #424242;
   padding: .5em;
   margin-bottom: 1em;
 }

@@ -34,31 +34,34 @@ router.post('/',  (req, res) => {
     });
 });
 
-// TODO - PUT
-// Updates a book to show that it has been read
-// Request must include a parameter indicating what book to update - the id
-// Request body must include the content to update - the status
+
 router.put('/:id',  (req, res) => {
   let book = req.body; // Book with updated content
   let id = req.params.id; // id of the book to update
-
+  const query = `UPDATE "books" SET "status"='read' WHERE"id"=$1;`;
   console.log(`Updating book ${id} with `, book);
-
-  // TODO - REPLACE BELOW WITH YOUR CODE
-  res.sendStatus(500);
-
+  pool.query(query, [req.params.id])
+  .then((result) =>{
+    res.sendStatus(200);
+  }).catch((err) => {
+    console.log(`Error making update: ${query}`, err);
+    res.sendStatus(500);
+  });
 });
 
-// TODO - DELETE 
-// Removes a book to show that it has been read
-// Request must include a parameter indicating what book to update - the id
+  //done
 router.delete('/:id',  (req, res) => {
-  let id = req.params.id; // id of the thing to delete
+  let id = req.params.id;
   console.log('Delete route called with id of', id);
+  const query = 'DELETE FROM "books" WHERE id=$1;';
+  pool.query(query, [id]).
+  then((result) => {
+    res.sendStatus(204);
+  }).catch((err) => {
 
-  // TODO - REPLACE BELOW WITH YOUR CODE
+  console.log(`error making the request: ${query}`);
   res.sendStatus(500);
-
+  })
 });
 
 module.exports = router;

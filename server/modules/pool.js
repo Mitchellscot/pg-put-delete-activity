@@ -3,6 +3,8 @@ const pg = require('pg');
 const config = {
   database: 'awesome_reads', 
   host: 'localhost', 
+  user: 'postgres',
+  password: 'password',    
   port: 5432, 
   max: 10, 
   idleTimeoutMillis: 30000 
