@@ -5,6 +5,24 @@ function ready(){
   refreshBooks();
   $('#submitBtn').on('click', handleSubmit);
   $('table').on('click', '.delete', deleteBook);
+  $('table').on('click', '.update', updateBook)
+}
+
+function updateBook(event) {
+  let bookid = $(event.target).data('bookid');
+  $.ajax({
+    method: 'PUT',
+    url: `/books/status/${bookid}`,
+    data: {
+      status: 'read'
+    }
+  })
+  .then((response) => {
+    refreshBooks();
+  })
+  .catch((error) => {
+    alert('Error updating the status of the book', error);
+  })
 }
 
 function deleteBook(event) {
@@ -17,7 +35,6 @@ function deleteBook(event) {
   }).then((response) => {
     refreshBooks();
   })
-
 }
 
 function handleSubmit() {
@@ -65,7 +82,7 @@ function renderBooks(books) {
     let book = books[i];
     // For each book, append a new row to our table
     let $tr = $('<tr></tr>');
-    $tr.data('book', book);
+    //$tr.data('book', book);
     $tr.append(`<td>${book.title}</td>`);
     $tr.append(`<td>${book.author}</td>`);
     $tr.append(`<td>${book.status}</td>`);

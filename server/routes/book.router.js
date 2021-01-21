@@ -35,12 +35,12 @@ router.post('/',  (req, res) => {
 });
 
 
-router.put('/:id',  (req, res) => {
+router.put('/status/:id',  (req, res) => {
   let book = req.body; // Book with updated content
   let id = req.params.id; // id of the book to update
   const query = `UPDATE "books" SET "status"='read' WHERE"id"=$1;`;
   console.log(`Updating book ${id} with `, book);
-  pool.query(query, [req.params.id])
+  pool.query(query, [id])
   .then((result) =>{
     res.sendStatus(200);
   }).catch((err) => {
@@ -58,7 +58,6 @@ router.delete('/:id',  (req, res) => {
   then((result) => {
     res.sendStatus(204);
   }).catch((err) => {
-
   console.log(`error making the request: ${query}`);
   res.sendStatus(500);
   })
